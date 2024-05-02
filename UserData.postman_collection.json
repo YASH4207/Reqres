@@ -1,0 +1,2029 @@
+{
+	"info": {
+		"_postman_id": "72a13c17-6574-4a64-beb4-71a1148f8734",
+		"name": "UserData",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "33110825"
+	},
+	"item": [
+		{
+			"name": "List users",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//(1) Test for verifying the status code\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"//(2) Test for verifying the status description \r",
+							"pm.test(\"Status Description is OK\", function () {\r",
+							"    pm.response.to.have.status(\"OK\");\r",
+							"});\r",
+							"\r",
+							"//(3) Test for verifying the response time\r",
+							"pm.test(\"Response time is less than 500ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+							"});\r",
+							"\r",
+							"//(4) Test to verify response body using Contains\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"total\");\r",
+							"});\r",
+							"\r",
+							"var responseBody = {\r",
+							"    \"page\": 2,\r",
+							"    \"per_page\": 6,\r",
+							"    \"total\": 12,\r",
+							"    \"total_pages\": 2,\r",
+							"    \"data\": [\r",
+							"        {\r",
+							"            \"id\": 7,\r",
+							"            \"email\": \"michael.lawson@reqres.in\",\r",
+							"            \"first_name\": \"Michael\",\r",
+							"            \"last_name\": \"Lawson\",\r",
+							"            \"avatar\": \"https://reqres.in/img/faces/7-image.jpg\"\r",
+							"        },\r",
+							"        {\r",
+							"            \"id\": 8,\r",
+							"            \"email\": \"lindsay.ferguson@reqres.in\",\r",
+							"            \"first_name\": \"Lindsay\",\r",
+							"            \"last_name\": \"Ferguson\",\r",
+							"            \"avatar\": \"https://reqres.in/img/faces/8-image.jpg\"\r",
+							"        },\r",
+							"        {\r",
+							"            \"id\": 9,\r",
+							"            \"email\": \"tobias.funke@reqres.in\",\r",
+							"            \"first_name\": \"Tobias\",\r",
+							"            \"last_name\": \"Funke\",\r",
+							"            \"avatar\": \"https://reqres.in/img/faces/9-image.jpg\"\r",
+							"        },\r",
+							"        {\r",
+							"            \"id\": 10,\r",
+							"            \"email\": \"byron.fields@reqres.in\",\r",
+							"            \"first_name\": \"Byron\",\r",
+							"            \"last_name\": \"Fields\",\r",
+							"            \"avatar\": \"https://reqres.in/img/faces/10-image.jpg\"\r",
+							"        },\r",
+							"        {\r",
+							"            \"id\": 11,\r",
+							"            \"email\": \"george.edwards@reqres.in\",\r",
+							"            \"first_name\": \"George\",\r",
+							"            \"last_name\": \"Edwards\",\r",
+							"            \"avatar\": \"https://reqres.in/img/faces/11-image.jpg\"\r",
+							"        },\r",
+							"        {\r",
+							"            \"id\": 12,\r",
+							"            \"email\": \"rachel.howell@reqres.in\",\r",
+							"            \"first_name\": \"Rachel\",\r",
+							"            \"last_name\": \"Howell\",\r",
+							"            \"avatar\": \"https://reqres.in/img/faces/12-image.jpg\"\r",
+							"        }\r",
+							"    ],\r",
+							"    \"support\": {\r",
+							"        \"url\": \"https://reqres.in/#support-heading\",\r",
+							"        \"text\": \"To keep ReqRes free, contributions towards server costs are appreciated!\"\r",
+							"    }\r",
+							"};\r",
+							"\r",
+							"//(5) test to verify response body using equal\r",
+							"pm.test(\"Body is correct\", function () {\r",
+							"    pm.response.to.have.body(responseBody);\r",
+							"});\r",
+							"\r",
+							"//(6) Test to fetch data from response\r",
+							"pm.test(\"The value of data is fetched\", function(){\r",
+							"    var x=pm.response.json();\r",
+							"    var data= x.data;\r",
+							"    console.log(data[4]);\r",
+							"});\r",
+							"\r",
+							"//(7)\r",
+							"pm.test(\"set a variable\", function(){\r",
+							"    var url = pm.response.json().support.url;\r",
+							"    pm.globals.set(\"variable1\",url);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Reqres Base URL}}/api/users?page=2",
+					"host": [
+						"{{Reqres Base URL}}"
+					],
+					"path": [
+						"api",
+						"users"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Listed users",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Reqres Base URL}}/api/users?page=2",
+							"host": [
+								"{{Reqres Base URL}}"
+							],
+							"path": [
+								"api",
+								"users"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Wed, 13 Mar 2024 19:04:52 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Report-To",
+							"value": "{\"group\":\"heroku-nel\",\"max_age\":3600,\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?ts=1710352817&sid=c4c9725f-1ab0-44d8-820f-430df2718e11&s=H4iM070do8qvTR8Ok77iMM7d7qSPF5M85LLo1uPIwkc%3D\"}]}"
+						},
+						{
+							"key": "Reporting-Endpoints",
+							"value": "heroku-nel=https://nel.heroku.com/reports?ts=1710352817&sid=c4c9725f-1ab0-44d8-820f-430df2718e11&s=H4iM070do8qvTR8Ok77iMM7d7qSPF5M85LLo1uPIwkc%3D"
+						},
+						{
+							"key": "Nel",
+							"value": "{\"report_to\":\"heroku-nel\",\"max_age\":3600,\"success_fraction\":0.005,\"failure_fraction\":0.05,\"response_headers\":[\"Via\"]}"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Etag",
+							"value": "W/\"406-ut0vzoCuidvyMf8arZpMpJ6ZRDw\""
+						},
+						{
+							"key": "Via",
+							"value": "1.1 vegur"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "max-age=14400"
+						},
+						{
+							"key": "CF-Cache-Status",
+							"value": "HIT"
+						},
+						{
+							"key": "Age",
+							"value": "3875"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "Server",
+							"value": "cloudflare"
+						},
+						{
+							"key": "CF-RAY",
+							"value": "863e4acd6e704254-BOM"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "br"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"page\": 2,\n    \"per_page\": 6,\n    \"total\": 12,\n    \"total_pages\": 2,\n    \"data\": [\n        {\n            \"id\": 7,\n            \"email\": \"michael.lawson@reqres.in\",\n            \"first_name\": \"Michael\",\n            \"last_name\": \"Lawson\",\n            \"avatar\": \"https://reqres.in/img/faces/7-image.jpg\"\n        },\n        {\n            \"id\": 8,\n            \"email\": \"lindsay.ferguson@reqres.in\",\n            \"first_name\": \"Lindsay\",\n            \"last_name\": \"Ferguson\",\n            \"avatar\": \"https://reqres.in/img/faces/8-image.jpg\"\n        },\n        {\n            \"id\": 9,\n            \"email\": \"tobias.funke@reqres.in\",\n            \"first_name\": \"Tobias\",\n            \"last_name\": \"Funke\",\n            \"avatar\": \"https://reqres.in/img/faces/9-image.jpg\"\n        },\n        {\n            \"id\": 10,\n            \"email\": \"byron.fields@reqres.in\",\n            \"first_name\": \"Byron\",\n            \"last_name\": \"Fields\",\n            \"avatar\": \"https://reqres.in/img/faces/10-image.jpg\"\n        },\n        {\n            \"id\": 11,\n            \"email\": \"george.edwards@reqres.in\",\n            \"first_name\": \"George\",\n            \"last_name\": \"Edwards\",\n            \"avatar\": \"https://reqres.in/img/faces/11-image.jpg\"\n        },\n        {\n            \"id\": 12,\n            \"email\": \"rachel.howell@reqres.in\",\n            \"first_name\": \"Rachel\",\n            \"last_name\": \"Howell\",\n            \"avatar\": \"https://reqres.in/img/faces/12-image.jpg\"\n        }\n    ],\n    \"support\": {\n        \"url\": \"https://reqres.in/#support-heading\",\n        \"text\": \"To keep ReqRes free, contributions towards server costs are appreciated!\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Single User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Test for verifying the status code\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"}); \r",
+							"\r",
+							"// Test to verify status Description\r",
+							"pm.test(\"Status description is OK\", function () {\r",
+							"    pm.response.to.have.status(\"OK\");\r",
+							"});\r",
+							"\r",
+							"//Test to verify Response time\r",
+							"pm.test(\"Response time is less than 3s00ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(300);\r",
+							"});\r",
+							"\r",
+							"//Test to verify Actual Data\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://reqres.in/api/users/2"
+			},
+			"response": [
+				{
+					"name": "Single User",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://reqres.in/api/users/2"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Wed, 13 Mar 2024 18:38:39 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Report-To",
+							"value": "{\"group\":\"heroku-nel\",\"max_age\":3600,\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?ts=1710329533&sid=c4c9725f-1ab0-44d8-820f-430df2718e11&s=eXV5AZvcJoXUFT1NW%2FKOHqStxR4j%2BNYkMlRLdZe6Pdc%3D\"}]}"
+						},
+						{
+							"key": "Reporting-Endpoints",
+							"value": "heroku-nel=https://nel.heroku.com/reports?ts=1710329533&sid=c4c9725f-1ab0-44d8-820f-430df2718e11&s=eXV5AZvcJoXUFT1NW%2FKOHqStxR4j%2BNYkMlRLdZe6Pdc%3D"
+						},
+						{
+							"key": "Nel",
+							"value": "{\"report_to\":\"heroku-nel\",\"max_age\":3600,\"success_fraction\":0.005,\"failure_fraction\":0.05,\"response_headers\":[\"Via\"]}"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Etag",
+							"value": "W/\"118-pbdwwFo9SKNhD3Lx5iHJyngpq00\""
+						},
+						{
+							"key": "Via",
+							"value": "1.1 vegur"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "max-age=14400"
+						},
+						{
+							"key": "CF-Cache-Status",
+							"value": "HIT"
+						},
+						{
+							"key": "Age",
+							"value": "3877"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "Server",
+							"value": "cloudflare"
+						},
+						{
+							"key": "CF-RAY",
+							"value": "863e2467c90e4254-BOM"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "br"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": {\n        \"id\": 2,\n        \"email\": \"janet.weaver@reqres.in\",\n        \"first_name\": \"Janet\",\n        \"last_name\": \"Weaver\",\n        \"avatar\": \"https://reqres.in/img/faces/2-image.jpg\"\n    },\n    \"support\": {\n        \"url\": \"https://reqres.in/#support-heading\",\n        \"text\": \"To keep ReqRes free, contributions towards server costs are appreciated!\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Single user not found",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Test for verifying the status code\r",
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"}); \r",
+							"\r",
+							"// Test to verify status Description\r",
+							"pm.test(\"Status description is Not Found\", function () {\r",
+							"    pm.response.to.have.status(\"Not Found\");\r",
+							"});\r",
+							"\r",
+							"//Test to verify Response time\r",
+							"pm.test(\"Response time is less than 500ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+							"});\r",
+							"\r",
+							"//Test to verify Actual Data"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "https://reqres.in/api/users/23"
+			},
+			"response": [
+				{
+					"name": "Single User not found",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": "https://reqres.in/api/users/23"
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Wed, 13 Mar 2024 18:39:53 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "2"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Report-To",
+							"value": "{\"group\":\"heroku-nel\",\"max_age\":3600,\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?ts=1710355022&sid=c4c9725f-1ab0-44d8-820f-430df2718e11&s=pJHDX%2Bc%2BpxXF%2B5sa5QZ8hazR%2FDWCGM9I0vUeLRR4LSU%3D\"}]}"
+						},
+						{
+							"key": "Reporting-Endpoints",
+							"value": "heroku-nel=https://nel.heroku.com/reports?ts=1710355022&sid=c4c9725f-1ab0-44d8-820f-430df2718e11&s=pJHDX%2Bc%2BpxXF%2B5sa5QZ8hazR%2FDWCGM9I0vUeLRR4LSU%3D"
+						},
+						{
+							"key": "Nel",
+							"value": "{\"report_to\":\"heroku-nel\",\"max_age\":3600,\"success_fraction\":0.005,\"failure_fraction\":0.05,\"response_headers\":[\"Via\"]}"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Etag",
+							"value": "W/\"2-vyGp6PvFo4RvsFtPoIWeCReyIC8\""
+						},
+						{
+							"key": "Via",
+							"value": "1.1 vegur"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "max-age=14400"
+						},
+						{
+							"key": "CF-Cache-Status",
+							"value": "HIT"
+						},
+						{
+							"key": "Age",
+							"value": "171"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "Server",
+							"value": "cloudflare"
+						},
+						{
+							"key": "CF-RAY",
+							"value": "863e2638ccc34254-BOM"
+						}
+					],
+					"cookie": [],
+					"body": "{}"
+				}
+			]
+		},
+		{
+			"name": "List<Resource>",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Test for verifying the status code\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"}); \r",
+							"\r",
+							"// Test to verify status Description\r",
+							"pm.test(\"Status description is OK\", function () {\r",
+							"    pm.response.to.have.status(\"OK\");\r",
+							"});\r",
+							"\r",
+							"//Test to verify Response time\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							"\r",
+							"//Test to verify Actual Data\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "https://reqres.in/api/unknown"
+			},
+			"response": [
+				{
+					"name": "Listed Resources",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": "https://reqres.in/api/unknown"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Wed, 13 Mar 2024 18:41:19 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Report-To",
+							"value": "{\"group\":\"heroku-nel\",\"max_age\":3600,\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?ts=1709613704&sid=c4c9725f-1ab0-44d8-820f-430df2718e11&s=Id%2FXWtPUoj%2BC%2BYYxxGqSN3b62WvEI0F%2BZsgsgP%2F2h8M%3D\"}]}"
+						},
+						{
+							"key": "Reporting-Endpoints",
+							"value": "heroku-nel=https://nel.heroku.com/reports?ts=1709613704&sid=c4c9725f-1ab0-44d8-820f-430df2718e11&s=Id%2FXWtPUoj%2BC%2BYYxxGqSN3b62WvEI0F%2BZsgsgP%2F2h8M%3D"
+						},
+						{
+							"key": "Nel",
+							"value": "{\"report_to\":\"heroku-nel\",\"max_age\":3600,\"success_fraction\":0.005,\"failure_fraction\":0.05,\"response_headers\":[\"Via\"]}"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Etag",
+							"value": "W/\"2c1-N6Rqerxquq2kgQhL51EiSg4x0R8\""
+						},
+						{
+							"key": "Via",
+							"value": "1.1 vegur"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "max-age=14400"
+						},
+						{
+							"key": "CF-Cache-Status",
+							"value": "HIT"
+						},
+						{
+							"key": "Age",
+							"value": "7111"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "Server",
+							"value": "cloudflare"
+						},
+						{
+							"key": "CF-RAY",
+							"value": "863e28530b554254-BOM"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "br"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"page\": 1,\n    \"per_page\": 6,\n    \"total\": 12,\n    \"total_pages\": 2,\n    \"data\": [\n        {\n            \"id\": 1,\n            \"name\": \"cerulean\",\n            \"year\": 2000,\n            \"color\": \"#98B2D1\",\n            \"pantone_value\": \"15-4020\"\n        },\n        {\n            \"id\": 2,\n            \"name\": \"fuchsia rose\",\n            \"year\": 2001,\n            \"color\": \"#C74375\",\n            \"pantone_value\": \"17-2031\"\n        },\n        {\n            \"id\": 3,\n            \"name\": \"true red\",\n            \"year\": 2002,\n            \"color\": \"#BF1932\",\n            \"pantone_value\": \"19-1664\"\n        },\n        {\n            \"id\": 4,\n            \"name\": \"aqua sky\",\n            \"year\": 2003,\n            \"color\": \"#7BC4C4\",\n            \"pantone_value\": \"14-4811\"\n        },\n        {\n            \"id\": 5,\n            \"name\": \"tigerlily\",\n            \"year\": 2004,\n            \"color\": \"#E2583E\",\n            \"pantone_value\": \"17-1456\"\n        },\n        {\n            \"id\": 6,\n            \"name\": \"blue turquoise\",\n            \"year\": 2005,\n            \"color\": \"#53B0AE\",\n            \"pantone_value\": \"15-5217\"\n        }\n    ],\n    \"support\": {\n        \"url\": \"https://reqres.in/#support-heading\",\n        \"text\": \"To keep ReqRes free, contributions towards server costs are appreciated!\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Single Resource",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Test for verifying the status code\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"}); \r",
+							"\r",
+							"// Test to verify status Description\r",
+							"pm.test(\"Status description is OK\", function () {\r",
+							"    pm.response.to.have.status(\"OK\");\r",
+							"});\r",
+							"\r",
+							"//Test to verify Response time\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							"\r",
+							"//Test to verify Actual Data\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "https://reqres.in/api/unknown/2"
+			},
+			"response": [
+				{
+					"name": "Single Resource",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": "https://reqres.in/api/unknown/2"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Wed, 13 Mar 2024 18:42:49 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Report-To",
+							"value": "{\"group\":\"heroku-nel\",\"max_age\":3600,\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?ts=1710344055&sid=c4c9725f-1ab0-44d8-820f-430df2718e11&s=mlGE2y5mO6V3DtYdU2p6I1vPCurpQmMF8YGpREsuFf8%3D\"}]}"
+						},
+						{
+							"key": "Reporting-Endpoints",
+							"value": "heroku-nel=https://nel.heroku.com/reports?ts=1710344055&sid=c4c9725f-1ab0-44d8-820f-430df2718e11&s=mlGE2y5mO6V3DtYdU2p6I1vPCurpQmMF8YGpREsuFf8%3D"
+						},
+						{
+							"key": "Nel",
+							"value": "{\"report_to\":\"heroku-nel\",\"max_age\":3600,\"success_fraction\":0.005,\"failure_fraction\":0.05,\"response_headers\":[\"Via\"]}"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Etag",
+							"value": "W/\"e8-ov4wWh4/OY1IMQMqWgskYtOFnVs\""
+						},
+						{
+							"key": "Via",
+							"value": "1.1 vegur"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "max-age=14400"
+						},
+						{
+							"key": "CF-Cache-Status",
+							"value": "HIT"
+						},
+						{
+							"key": "Age",
+							"value": "4106"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "Server",
+							"value": "cloudflare"
+						},
+						{
+							"key": "CF-RAY",
+							"value": "863e2a82ef964254-BOM"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "br"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": {\n        \"id\": 2,\n        \"name\": \"fuchsia rose\",\n        \"year\": 2001,\n        \"color\": \"#C74375\",\n        \"pantone_value\": \"17-2031\"\n    },\n    \"support\": {\n        \"url\": \"https://reqres.in/#support-heading\",\n        \"text\": \"To keep ReqRes free, contributions towards server costs are appreciated!\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Single <Resource> not found",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Test for verifying the status code\r",
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"}); \r",
+							"\r",
+							"// Test to verify status Description\r",
+							"pm.test(\"Status description is Not Found\", function () {\r",
+							"    pm.response.to.have.status(\"Not Found\");\r",
+							"});\r",
+							"\r",
+							"//Test to verify Response time\r",
+							"pm.test(\"Response time is less than 500ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+							"});\r",
+							"\r",
+							"//Test to verify Actual Data\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "https://reqres.in/api/unknown/23"
+			},
+			"response": [
+				{
+					"name": "Single Resource not found",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": "https://reqres.in/api/unknown/23"
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Wed, 13 Mar 2024 18:44:24 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "2"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Report-To",
+							"value": "{\"group\":\"heroku-nel\",\"max_age\":3600,\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?ts=1710355452&sid=c4c9725f-1ab0-44d8-820f-430df2718e11&s=CtLHn2Fj5P8RRL%2FfZPDnJH6DwAz4I3F4e1xpTUtE9cg%3D\"}]}"
+						},
+						{
+							"key": "Reporting-Endpoints",
+							"value": "heroku-nel=https://nel.heroku.com/reports?ts=1710355452&sid=c4c9725f-1ab0-44d8-820f-430df2718e11&s=CtLHn2Fj5P8RRL%2FfZPDnJH6DwAz4I3F4e1xpTUtE9cg%3D"
+						},
+						{
+							"key": "Nel",
+							"value": "{\"report_to\":\"heroku-nel\",\"max_age\":3600,\"success_fraction\":0.005,\"failure_fraction\":0.05,\"response_headers\":[\"Via\"]}"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Etag",
+							"value": "W/\"2-vyGp6PvFo4RvsFtPoIWeCReyIC8\""
+						},
+						{
+							"key": "Via",
+							"value": "1.1 vegur"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "max-age=14400"
+						},
+						{
+							"key": "CF-Cache-Status",
+							"value": "HIT"
+						},
+						{
+							"key": "Age",
+							"value": "12"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "Server",
+							"value": "cloudflare"
+						},
+						{
+							"key": "CF-RAY",
+							"value": "863e2cd4097e4254-BOM"
+						}
+					],
+					"cookie": [],
+					"body": "{}"
+				}
+			]
+		},
+		{
+			"name": "Create",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Test for verifying the status code\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"}); \r",
+							"\r",
+							"// Test to verify status Description\r",
+							"pm.test(\"Status description is Created\", function () {\r",
+							"    pm.response.to.have.status(\"Created\");\r",
+							"});\r",
+							"\r",
+							"//Test to verify Response time\r",
+							"pm.test(\"Response time is less than 500ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+							"});\r",
+							"\r",
+							"//Test to verify Actual Data\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": "https://reqres.in/api/users"
+			},
+			"response": [
+				{
+					"name": "Created",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": "https://reqres.in/api/users"
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Wed, 13 Mar 2024 18:46:27 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "51"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Report-To",
+							"value": "{\"group\":\"heroku-nel\",\"max_age\":3600,\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?ts=1710355587&sid=c4c9725f-1ab0-44d8-820f-430df2718e11&s=MrWiCHIIxz3XCZS1hUlqe7iBE3DtwKlj8kVXEZO7AAA%3D\"}]}"
+						},
+						{
+							"key": "Reporting-Endpoints",
+							"value": "heroku-nel=https://nel.heroku.com/reports?ts=1710355587&sid=c4c9725f-1ab0-44d8-820f-430df2718e11&s=MrWiCHIIxz3XCZS1hUlqe7iBE3DtwKlj8kVXEZO7AAA%3D"
+						},
+						{
+							"key": "Nel",
+							"value": "{\"report_to\":\"heroku-nel\",\"max_age\":3600,\"success_fraction\":0.005,\"failure_fraction\":0.05,\"response_headers\":[\"Via\"]}"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Etag",
+							"value": "W/\"33-aRJ6eKLVUFcQeKZXcL5JS7gQyw0\""
+						},
+						{
+							"key": "Via",
+							"value": "1.1 vegur"
+						},
+						{
+							"key": "CF-Cache-Status",
+							"value": "DYNAMIC"
+						},
+						{
+							"key": "Server",
+							"value": "cloudflare"
+						},
+						{
+							"key": "CF-RAY",
+							"value": "863e2fd32a604254-BOM"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": \"672\",\n    \"createdAt\": \"2024-03-13T18:46:27.267Z\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Update",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Test for verifying the status code\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"}); \r",
+							"\r",
+							"// Test to verify status Description\r",
+							"pm.test(\"Status description is OK\", function () {\r",
+							"    pm.response.to.have.status(\"OK\");\r",
+							"});\r",
+							"\r",
+							"//Test to verify Response time\r",
+							"pm.test(\"Response time is less than 500ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+							"});\r",
+							"\r",
+							"//Test to verify Actual Data\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"morpheus\",\r\n    \"job\": \"zion resident\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://reqres.in/api/users/2"
+			},
+			"response": [
+				{
+					"name": "Updated",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"morpheus\",\r\n    \"job\": \"zion resident\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://reqres.in/api/users/2"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Wed, 13 Mar 2024 18:47:44 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Report-To",
+							"value": "{\"group\":\"heroku-nel\",\"max_age\":3600,\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?ts=1710355664&sid=c4c9725f-1ab0-44d8-820f-430df2718e11&s=PEdZzDUPqsWuSthoez5Z4Y06tYQC420EgWXFyAW4VqU%3D\"}]}"
+						},
+						{
+							"key": "Reporting-Endpoints",
+							"value": "heroku-nel=https://nel.heroku.com/reports?ts=1710355664&sid=c4c9725f-1ab0-44d8-820f-430df2718e11&s=PEdZzDUPqsWuSthoez5Z4Y06tYQC420EgWXFyAW4VqU%3D"
+						},
+						{
+							"key": "Nel",
+							"value": "{\"report_to\":\"heroku-nel\",\"max_age\":3600,\"success_fraction\":0.005,\"failure_fraction\":0.05,\"response_headers\":[\"Via\"]}"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Etag",
+							"value": "W/\"50-123cAXXPk3YKgoW3xj6kJoXIKq4\""
+						},
+						{
+							"key": "Via",
+							"value": "1.1 vegur"
+						},
+						{
+							"key": "CF-Cache-Status",
+							"value": "DYNAMIC"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "Server",
+							"value": "cloudflare"
+						},
+						{
+							"key": "CF-RAY",
+							"value": "863e31b4c93c4254-BOM"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "br"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"name\": \"morpheus\",\n    \"job\": \"zion resident\",\n    \"updatedAt\": \"2024-03-13T18:47:44.326Z\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Update",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Test for verifying the status code\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"}); \r",
+							"\r",
+							"// Test to verify status Description\r",
+							"pm.test(\"Status description is OK\", function () {\r",
+							"    pm.response.to.have.status(\"OK\");\r",
+							"});\r",
+							"\r",
+							"//Test to verify Response time\r",
+							"pm.test(\"Response time is less than 500ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+							"});\r",
+							"\r",
+							"//Test to verify Actual Data\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"morpheus\",\r\n    \"job\": \"zion resident\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://reqres.in/api/users/2"
+			},
+			"response": [
+				{
+					"name": "New Request",
+					"originalRequest": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"morpheus\",\r\n    \"job\": \"zion resident\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://reqres.in/api/users/2"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Wed, 13 Mar 2024 18:49:24 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Report-To",
+							"value": "{\"group\":\"heroku-nel\",\"max_age\":3600,\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?ts=1710355764&sid=c4c9725f-1ab0-44d8-820f-430df2718e11&s=IJWjoqKY0hIO4z4CRGxBM7JlneO6Dab611NTwABMO0o%3D\"}]}"
+						},
+						{
+							"key": "Reporting-Endpoints",
+							"value": "heroku-nel=https://nel.heroku.com/reports?ts=1710355764&sid=c4c9725f-1ab0-44d8-820f-430df2718e11&s=IJWjoqKY0hIO4z4CRGxBM7JlneO6Dab611NTwABMO0o%3D"
+						},
+						{
+							"key": "Nel",
+							"value": "{\"report_to\":\"heroku-nel\",\"max_age\":3600,\"success_fraction\":0.005,\"failure_fraction\":0.05,\"response_headers\":[\"Via\"]}"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Etag",
+							"value": "W/\"50-RGPz1OlzyBaqkTm9A+buRG4dO3g\""
+						},
+						{
+							"key": "Via",
+							"value": "1.1 vegur"
+						},
+						{
+							"key": "CF-Cache-Status",
+							"value": "DYNAMIC"
+						},
+						{
+							"key": "Server",
+							"value": "cloudflare"
+						},
+						{
+							"key": "CF-RAY",
+							"value": "863e34245d3e4254-BOM"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "br"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"name\": \"morpheus\",\n    \"job\": \"zion resident\",\n    \"updatedAt\": \"2024-03-13T18:49:24.094Z\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Delete",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Test for verifying the status code\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(204);\r",
+							"}); \r",
+							"\r",
+							"// Test to verify status Description\r",
+							"pm.test(\"Status description is No Content\", function () {\r",
+							"    pm.response.to.have.status(\"No Content\");\r",
+							"});\r",
+							"\r",
+							"//Test to verify Response time\r",
+							"pm.test(\"Response time is less than 400ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(400);\r",
+							"});\r",
+							"\r",
+							"//Test to verify Actual Data\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": "https://reqres.in/api/users/2"
+			},
+			"response": [
+				{
+					"name": "Deleted",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": "https://reqres.in/api/users/2"
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Wed, 13 Mar 2024 19:04:20 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "0"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Report-To",
+							"value": "{\"group\":\"heroku-nel\",\"max_age\":3600,\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?ts=1710356660&sid=c4c9725f-1ab0-44d8-820f-430df2718e11&s=HB9z5iy%2FkIvLU1S64NAQw0jZ9BDlC2TD1rD%2Bypz%2FB0U%3D\"}]}"
+						},
+						{
+							"key": "Reporting-Endpoints",
+							"value": "heroku-nel=https://nel.heroku.com/reports?ts=1710356660&sid=c4c9725f-1ab0-44d8-820f-430df2718e11&s=HB9z5iy%2FkIvLU1S64NAQw0jZ9BDlC2TD1rD%2Bypz%2FB0U%3D"
+						},
+						{
+							"key": "Nel",
+							"value": "{\"report_to\":\"heroku-nel\",\"max_age\":3600,\"success_fraction\":0.005,\"failure_fraction\":0.05,\"response_headers\":[\"Via\"]}"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Etag",
+							"value": "W/\"2-vyGp6PvFo4RvsFtPoIWeCReyIC8\""
+						},
+						{
+							"key": "Via",
+							"value": "1.1 vegur"
+						},
+						{
+							"key": "CF-Cache-Status",
+							"value": "DYNAMIC"
+						},
+						{
+							"key": "Server",
+							"value": "cloudflare"
+						},
+						{
+							"key": "CF-RAY",
+							"value": "863e4a076bf94254-BOM"
+						}
+					],
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Register -Successfull",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Test for verifying the status code\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"}); \r",
+							"\r",
+							"// Test to verify status Description\r",
+							"pm.test(\"Status description is OK\", function () {\r",
+							"    pm.response.to.have.status(\"OK\");\r",
+							"});\r",
+							"\r",
+							"//Test to verify Response time\r",
+							"pm.test(\"Response time is less than 500ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+							"});\r",
+							"\r",
+							"//Test to verify Actual Data\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"eve.holt@reqres.in\",\r\n    \"password\": \"pistol\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://reqres.in/api/register"
+			},
+			"response": [
+				{
+					"name": "Registered- Successfull",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"eve.holt@reqres.in\",\r\n    \"password\": \"pistol\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://reqres.in/api/register"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Wed, 13 Mar 2024 18:53:13 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "36"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Report-To",
+							"value": "{\"group\":\"heroku-nel\",\"max_age\":3600,\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?ts=1710355993&sid=c4c9725f-1ab0-44d8-820f-430df2718e11&s=p2lnwqmfoLOnMzHZ3Uqx8Q%2B4JXwUbEplpaxVwHB7rfg%3D\"}]}"
+						},
+						{
+							"key": "Reporting-Endpoints",
+							"value": "heroku-nel=https://nel.heroku.com/reports?ts=1710355993&sid=c4c9725f-1ab0-44d8-820f-430df2718e11&s=p2lnwqmfoLOnMzHZ3Uqx8Q%2B4JXwUbEplpaxVwHB7rfg%3D"
+						},
+						{
+							"key": "Nel",
+							"value": "{\"report_to\":\"heroku-nel\",\"max_age\":3600,\"success_fraction\":0.005,\"failure_fraction\":0.05,\"response_headers\":[\"Via\"]}"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Etag",
+							"value": "W/\"24-4iP0za1geN2he+ohu8F0FhCjLks\""
+						},
+						{
+							"key": "Via",
+							"value": "1.1 vegur"
+						},
+						{
+							"key": "CF-Cache-Status",
+							"value": "DYNAMIC"
+						},
+						{
+							"key": "Server",
+							"value": "cloudflare"
+						},
+						{
+							"key": "CF-RAY",
+							"value": "863e39be4d474254-BOM"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 4,\n    \"token\": \"QpwL5tke4Pnpja7X4\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Register - Unsuccessfull",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Test for verifying the status code\r",
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"}); \r",
+							"\r",
+							"// Test to verify status Description\r",
+							"pm.test(\"Status description is Bad Request\", function () {\r",
+							"    pm.response.to.have.status(\"Bad Request\");\r",
+							"});\r",
+							"\r",
+							"//Test to verify Response time\r",
+							"pm.test(\"Response time is less than 500ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+							"});\r",
+							"\r",
+							"//Test to verify Actual Data\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"sydney@fife\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://reqres.in/api/register"
+			},
+			"response": [
+				{
+					"name": "Registered - Unsuccessful",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"sydney@fife\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://reqres.in/api/register"
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Wed, 13 Mar 2024 18:56:19 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "28"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Report-To",
+							"value": "{\"group\":\"heroku-nel\",\"max_age\":3600,\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?ts=1710356179&sid=c4c9725f-1ab0-44d8-820f-430df2718e11&s=OZXYAwplIY1%2BY9vq4fp66vU4zOjn1fY%2BPGfZV3213ZM%3D\"}]}"
+						},
+						{
+							"key": "Reporting-Endpoints",
+							"value": "heroku-nel=https://nel.heroku.com/reports?ts=1710356179&sid=c4c9725f-1ab0-44d8-820f-430df2718e11&s=OZXYAwplIY1%2BY9vq4fp66vU4zOjn1fY%2BPGfZV3213ZM%3D"
+						},
+						{
+							"key": "Nel",
+							"value": "{\"report_to\":\"heroku-nel\",\"max_age\":3600,\"success_fraction\":0.005,\"failure_fraction\":0.05,\"response_headers\":[\"Via\"]}"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Etag",
+							"value": "W/\"1c-NmpazMScs9tOqR7eDEesn+pqC9Q\""
+						},
+						{
+							"key": "Via",
+							"value": "1.1 vegur"
+						},
+						{
+							"key": "CF-Cache-Status",
+							"value": "DYNAMIC"
+						},
+						{
+							"key": "Server",
+							"value": "cloudflare"
+						},
+						{
+							"key": "CF-RAY",
+							"value": "863e3e48fba44254-BOM"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": \"Missing password\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Login - Successful",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Test for verifying the status code\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"}); \r",
+							"\r",
+							"// Test to verify status Description\r",
+							"pm.test(\"Status description is OK\", function () {\r",
+							"    pm.response.to.have.status(\"OK\");\r",
+							"});\r",
+							"\r",
+							"//Test to verify Response time\r",
+							"pm.test(\"Response time is less than 500ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+							"});\r",
+							"\r",
+							"//Test to verify Actual Data\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"eve.holt@reqres.in\",\r\n    \"password\": \"cityslicka\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://reqres.in/api/login"
+			},
+			"response": [
+				{
+					"name": "Login - Successful",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"eve.holt@reqres.in\",\r\n    \"password\": \"cityslicka\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://reqres.in/api/login"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Wed, 13 Mar 2024 18:58:53 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "29"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Report-To",
+							"value": "{\"group\":\"heroku-nel\",\"max_age\":3600,\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?ts=1710356333&sid=c4c9725f-1ab0-44d8-820f-430df2718e11&s=b%2FbCqQTYvasrpFplxmHCAcPR%2F3jqcRyUbfaqXpi5pyQ%3D\"}]}"
+						},
+						{
+							"key": "Reporting-Endpoints",
+							"value": "heroku-nel=https://nel.heroku.com/reports?ts=1710356333&sid=c4c9725f-1ab0-44d8-820f-430df2718e11&s=b%2FbCqQTYvasrpFplxmHCAcPR%2F3jqcRyUbfaqXpi5pyQ%3D"
+						},
+						{
+							"key": "Nel",
+							"value": "{\"report_to\":\"heroku-nel\",\"max_age\":3600,\"success_fraction\":0.005,\"failure_fraction\":0.05,\"response_headers\":[\"Via\"]}"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Etag",
+							"value": "W/\"1d-lGCrvD6B7Qzk11+2C98+nGhhuec\""
+						},
+						{
+							"key": "Via",
+							"value": "1.1 vegur"
+						},
+						{
+							"key": "CF-Cache-Status",
+							"value": "DYNAMIC"
+						},
+						{
+							"key": "Server",
+							"value": "cloudflare"
+						},
+						{
+							"key": "CF-RAY",
+							"value": "863e42081e6a4254-BOM"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"token\": \"QpwL5tke4Pnpja7X4\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Login - Unsuccessful",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Test for verifying the status code\r",
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"}); \r",
+							"\r",
+							"// Test to verify status Description\r",
+							"pm.test(\"Status description is Bad Request\", function () {\r",
+							"    pm.response.to.have.status(\"Bad Request\");\r",
+							"});\r",
+							"\r",
+							"//Test to verify Response time\r",
+							"pm.test(\"Response time is less than 500ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+							"});\r",
+							"\r",
+							"//Test to verify Actual Data\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"peter@klaven\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://reqres.in/api/login"
+			},
+			"response": [
+				{
+					"name": "Login - Unsuccessful",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"peter@klaven\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://reqres.in/api/login"
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Wed, 13 Mar 2024 19:00:55 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "28"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Report-To",
+							"value": "{\"group\":\"heroku-nel\",\"max_age\":3600,\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?ts=1710356455&sid=c4c9725f-1ab0-44d8-820f-430df2718e11&s=XqMk2lQgciLqJdTkvLwrYA6dKE45fJjtUNvh%2Fekf8eE%3D\"}]}"
+						},
+						{
+							"key": "Reporting-Endpoints",
+							"value": "heroku-nel=https://nel.heroku.com/reports?ts=1710356455&sid=c4c9725f-1ab0-44d8-820f-430df2718e11&s=XqMk2lQgciLqJdTkvLwrYA6dKE45fJjtUNvh%2Fekf8eE%3D"
+						},
+						{
+							"key": "Nel",
+							"value": "{\"report_to\":\"heroku-nel\",\"max_age\":3600,\"success_fraction\":0.005,\"failure_fraction\":0.05,\"response_headers\":[\"Via\"]}"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Etag",
+							"value": "W/\"1c-NmpazMScs9tOqR7eDEesn+pqC9Q\""
+						},
+						{
+							"key": "Via",
+							"value": "1.1 vegur"
+						},
+						{
+							"key": "CF-Cache-Status",
+							"value": "DYNAMIC"
+						},
+						{
+							"key": "Server",
+							"value": "cloudflare"
+						},
+						{
+							"key": "CF-RAY",
+							"value": "863e45050f7e4254-BOM"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": \"Missing password\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Delayed Response",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Test for verifying the status code\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"}); \r",
+							"\r",
+							"// Test to verify status Description\r",
+							"pm.test(\"Status description is OK\", function () {\r",
+							"    pm.response.to.have.status(\"OK\");\r",
+							"});\r",
+							"\r",
+							"//Test to verify Response time\r",
+							"pm.test(\"Response time is less than 5000ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(5000);\r",
+							"});\r",
+							"\r",
+							"//Test to verify Actual Data\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://reqres.in/api/users?delay=3",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"users"
+					],
+					"query": [
+						{
+							"key": "delay",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Delayed Response",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://reqres.in/api/users?delay=3",
+							"protocol": "https",
+							"host": [
+								"reqres",
+								"in"
+							],
+							"path": [
+								"api",
+								"users"
+							],
+							"query": [
+								{
+									"key": "delay",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Wed, 13 Mar 2024 19:02:48 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Report-To",
+							"value": "{\"group\":\"heroku-nel\",\"max_age\":3600,\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?ts=1710356565&sid=c4c9725f-1ab0-44d8-820f-430df2718e11&s=yKmxH29mkJpYrA401%2B1azKDfL0verYoxCfc1uksC7y4%3D\"}]}"
+						},
+						{
+							"key": "Reporting-Endpoints",
+							"value": "heroku-nel=https://nel.heroku.com/reports?ts=1710356565&sid=c4c9725f-1ab0-44d8-820f-430df2718e11&s=yKmxH29mkJpYrA401%2B1azKDfL0verYoxCfc1uksC7y4%3D"
+						},
+						{
+							"key": "Nel",
+							"value": "{\"report_to\":\"heroku-nel\",\"max_age\":3600,\"success_fraction\":0.005,\"failure_fraction\":0.05,\"response_headers\":[\"Via\"]}"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Etag",
+							"value": "W/\"3e4-2RLXvr5wTg9YQ6aH95CkYoFNuO8\""
+						},
+						{
+							"key": "Via",
+							"value": "1.1 vegur"
+						},
+						{
+							"key": "CF-Cache-Status",
+							"value": "DYNAMIC"
+						},
+						{
+							"key": "Server",
+							"value": "cloudflare"
+						},
+						{
+							"key": "CF-RAY",
+							"value": "863e47b74bfe4254-BOM"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "br"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"page\": 1,\n    \"per_page\": 6,\n    \"total\": 12,\n    \"total_pages\": 2,\n    \"data\": [\n        {\n            \"id\": 1,\n            \"email\": \"george.bluth@reqres.in\",\n            \"first_name\": \"George\",\n            \"last_name\": \"Bluth\",\n            \"avatar\": \"https://reqres.in/img/faces/1-image.jpg\"\n        },\n        {\n            \"id\": 2,\n            \"email\": \"janet.weaver@reqres.in\",\n            \"first_name\": \"Janet\",\n            \"last_name\": \"Weaver\",\n            \"avatar\": \"https://reqres.in/img/faces/2-image.jpg\"\n        },\n        {\n            \"id\": 3,\n            \"email\": \"emma.wong@reqres.in\",\n            \"first_name\": \"Emma\",\n            \"last_name\": \"Wong\",\n            \"avatar\": \"https://reqres.in/img/faces/3-image.jpg\"\n        },\n        {\n            \"id\": 4,\n            \"email\": \"eve.holt@reqres.in\",\n            \"first_name\": \"Eve\",\n            \"last_name\": \"Holt\",\n            \"avatar\": \"https://reqres.in/img/faces/4-image.jpg\"\n        },\n        {\n            \"id\": 5,\n            \"email\": \"charles.morris@reqres.in\",\n            \"first_name\": \"Charles\",\n            \"last_name\": \"Morris\",\n            \"avatar\": \"https://reqres.in/img/faces/5-image.jpg\"\n        },\n        {\n            \"id\": 6,\n            \"email\": \"tracey.ramos@reqres.in\",\n            \"first_name\": \"Tracey\",\n            \"last_name\": \"Ramos\",\n            \"avatar\": \"https://reqres.in/img/faces/6-image.jpg\"\n        }\n    ],\n    \"support\": {\n        \"url\": \"https://reqres.in/#support-heading\",\n        \"text\": \"To keep ReqRes free, contributions towards server costs are appreciated!\"\n    }\n}"
+				}
+			]
+		}
+	]
+}
